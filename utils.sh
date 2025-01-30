@@ -5,7 +5,7 @@ source "$dir/config.sh"
 
 gen_wallet() {
   local out addr key
-  out=$(hoku account create)
+  out=$(recall account create)
   addr=$(echo "$out" | jq .address | tr -d '"')
   key=$(echo "$out" | jq .private_key | tr -d '"')
   echo "$addr" "$key"
@@ -41,14 +41,14 @@ require_admin_key() {
   local network="$1"
   case "$network" in
     devnet)
-      export HOKU_PRIVATE_KEY=$DEVNET_ADMIN_PRIVATE_KEY
+      export RECALL_PRIVATE_KEY=$DEVNET_ADMIN_PRIVATE_KEY
       ;;
     localnet)
-      export HOKU_PRIVATE_KEY=$LOCALNET_ADMIN_PRIVATE_KEY
+      export RECALL_PRIVATE_KEY=$LOCALNET_ADMIN_PRIVATE_KEY
       ;;
     testnet)
-      if [[ -z "${HOKU_PRIVATE_KEY:-}" ]]; then
-        echo "Error: HOKU_PRIVATE_KEY environment variable is required for testnet."
+      if [[ -z "${RECALL_PRIVATE_KEY:-}" ]]; then
+        echo "Error: RECALL_PRIVATE_KEY environment variable is required for testnet."
         exit 1
       fi
       ;;
@@ -72,7 +72,7 @@ get_objects_url() {
       pick_random "${TESTNET_OBJECTS_URLS[@]}"
       ;;
     *)
-      echo "Error: Invalid network: $HOKU_NETWORK"
+      echo "Error: Invalid network: $RECALL_NETWORK"
       exit 1
       ;;
   esac
@@ -91,7 +91,7 @@ get_rpc_url() {
       pick_random "${TESTNET_RPC_URLS[@]}"
       ;;
     *)
-      echo "Error: Invalid network: $HOKU_NETWORK"
+      echo "Error: Invalid network: $RECALL_NETWORK"
       exit 1
       ;;
   esac
