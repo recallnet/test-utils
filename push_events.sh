@@ -13,14 +13,14 @@ dir=$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]}")")
 source "$dir/config.sh"
 source "$dir/utils.sh"
 
-seq=$(hoku account info | jq .sequence)
+seq=$(recall account info | jq .sequence)
 
 for _ in $(seq 1 "$count"); do
   cid="bafkreihg32qccdh3zirvjdcopgtkd6vclfesz4b4m2uerz7xhnm3lju4wy"
 
-  rpc_url=$(get_rpc_url "$HOKU_NETWORK")
+  rpc_url=$(get_rpc_url "$RECALL_NETWORK")
 
-  cmd="hoku -q --rpc-url $rpc_url th push --gas-limit 30000000 -b $mode --sequence $seq -a $hub"
+  cmd="recall -q --rpc-url $rpc_url th push --gas-limit 30000000 -b $mode --sequence $seq -a $hub"
   res=$(echo "$cid" | $cmd 2>&1)
   echo "$res"
 

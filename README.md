@@ -1,6 +1,6 @@
 # Test Utils
 
-[![License](https://img.shields.io/github/license/hokunet/test-utils.svg)](./LICENSE)
+[![License](https://img.shields.io/github/license/recallnet/test-utils.svg)](./LICENSE)
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg)](https://github.com/RichardLitt/standard-readme)
 
 > Bash-based test utils for Recall
@@ -20,7 +20,7 @@ Simple bash scripts for monitoring gas usage and throughput in Recall.
 
 Most commmands take a `network` argument. This can be `devnet`, `localnet`, or `testnet`.
 
-With `testnet`, you'll need to provide a `HOKU_PRIVATE_KEY` environment variable,
+With `testnet`, you'll need to provide a `RECALL_PRIVATE_KEY` environment variable,
 which is used for the "admin" wallet.
 `devnet` and `localnet` will use a default (hard-coded) private key for the "admin" wallet.
 
@@ -125,4 +125,4 @@ the [standard-readme](https://github.com/RichardLitt/standard-readme) specificat
 
 ## License
 
-MIT OR Apache-2.0, © 2024 Hoku Contributors
+MIT OR Apache-2.0, © 2024 Recall Contributors

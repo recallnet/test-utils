@@ -27,17 +27,17 @@ approve_users_command() {
   fi
 
   require_admin_key "$network"
-  export HOKU_NETWORK=$network
-  admin=$(hoku account info | jq .address | tr -d '"')
+  export RECALL_NETWORK=$network
+  admin=$(recall account info | jq .address | tr -d '"')
 
   declare -a users
   get_wallets "$dir" users
 
   for user in "${users[@]}"; do
     IFS=':' read -r addr pk <<< "$user"
-    hoku account transfer --to "$addr" 1
-    hoku credit approve --to "$addr"
-    HOKU_PRIVATE_KEY="$pk" hoku account sponsor set "$admin"
+    recall account transfer --to "$addr" 1
+    recall credit approve --to "$addr"
+    RECALL_PRIVATE_KEY="$pk" recall account sponsor set "$admin"
   done
 
   echo "Approved users on $network"
@@ -53,9 +53,9 @@ buy_credit_command() {
   fi
 
   require_admin_key "$network"
-  export HOKU_NETWORK=$network
+  export RECALL_NETWORK=$network
 
-  hoku credit buy "$amount"
+  recall credit buy "$amount"
 
   echo "Bought credit on $network"
 }
@@ -72,19 +72,19 @@ add_user_objects_command() {
   fi
 
   require_admin_key "$network"
-  export HOKU_NETWORK=$network
+  export RECALL_NETWORK=$network
 
   declare -a users
   get_wallets "$dir" users
 
   if [[ -z "$bucket" ]]; then
-    bucket=$(hoku bu create | jq .address | tr -d '"')
+    bucket=$(recall bu create | jq .address | tr -d '"')
     echo "Using new bucket $bucket"
   fi
 
   for user in "${users[@]}"; do
     IFS=':' read -r addr pk <<< "$user"
-    HOKU_PRIVATE_KEY="$pk" "$dir/add_objects.sh" "$addr" "$bucket" "$count" "$mode" &
+    RECALL_PRIVATE_KEY="$pk" "$dir/add_objects.sh" "$addr" "$bucket" "$count" "$mode" &
   done
   wait
 
@@ -103,19 +103,19 @@ push_user_events_command() {
   fi
 
   require_admin_key "$network"
-  export HOKU_NETWORK=$network
+  export RECALL_NETWORK=$network
 
   declare -a users
   get_wallets "$dir" users
 
   if [[ -z "$hub" ]]; then
-    hub=$(hoku th create | jq .address | tr -d '"')
+    hub=$(recall th create | jq .address | tr -d '"')
     echo "Using new hub $hub"
   fi
 
   for user in "${users[@]}"; do
     IFS=':' read -r _ pk <<< "$user"
-    HOKU_PRIVATE_KEY="$pk" "$dir/push_events.sh" "$hub" "$count" "$mode" &
+    RECALL_PRIVATE_KEY="$pk" "$dir/push_events.sh" "$hub" "$count" "$mode" &
   done
   wait
 
