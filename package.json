@@ -1,0 +1,16 @@
+{
+  "name": "test-utils",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bash-based test utils for Recall",
+  "main": "watch-eth-blocks.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "viem": "^2.22.10"
+  }
+}

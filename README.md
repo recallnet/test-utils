@@ -81,7 +81,7 @@ You can also use an existing timehub:
 ./main.sh push-user-events localnet <events per user> <broadcast mode> <timehub address>
 ```
 
-### Watch blocks
+### Watch CometBFT blocks
 
 This is invaluable for monitoring transaction throughput when adding objects or pushing events.
 
@@ -114,7 +114,15 @@ We can see some useful information from the output:
 - The total amount of gas _used_ by the block (the sum of transaction `gas_used` amounts)
 - The current mempool transaction count
 - The current mempool byte size
-- From, to, gas wanted, and gas used values for each transaction 
+- From, to, gas wanted, and gas used values for each transaction
+
+### Watch Eth blocks
+
+This is useful For EVM event debugging.
+
+```sh
+node watch-eth-blocks.js
+```
 
 ## Contributing
 

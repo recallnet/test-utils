@@ -36,7 +36,7 @@ approve_users_command() {
   for user in "${users[@]}"; do
     IFS=':' read -r addr pk <<< "$user"
     recall account transfer --to "$addr" 1
-    recall credit approve --to "$addr"
+    recall account credit approve --to "$addr"
     RECALL_PRIVATE_KEY="$pk" recall account sponsor set "$admin"
   done
 
@@ -55,7 +55,7 @@ buy_credit_command() {
   require_admin_key "$network"
   export RECALL_NETWORK=$network
 
-  recall credit buy "$amount"
+  recall account credit buy "$amount"
 
   echo "Bought credit on $network"
 }
