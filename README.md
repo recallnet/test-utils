@@ -118,10 +118,18 @@ We can see some useful information from the output:
 
 ### Watch Eth blocks
 
-This is useful For EVM event debugging.
+This is useful for EVM event debugging.
 
 ```sh
 node watch-eth-blocks.js
+```
+
+### Watch Fenderming logs with filters
+
+This is useful for Fendermint debugging.
+
+```sh
+./watch_logs.sh 0 "blob pool counts" "blob fetched counts" "end block" "warn" "error"
 ```
 
 ## Contributing

@@ -17,8 +17,6 @@ source "$dir/utils.sh"
 temp_dir="/tmp/$user"
 mkdir -p "$temp_dir"
 
-seq=$(recall account info | jq .sequence)
-
 for i in $(seq 1 "$count"); do
   file_name="$temp_dir/file_$i"
   key=$(generate_random_string 7)
@@ -27,7 +25,7 @@ for i in $(seq 1 "$count"); do
   rpc_url=$(get_rpc_url "$RECALL_NETWORK")
   objects_url=$(get_objects_url "$RECALL_NETWORK")
 
-  cmd="recall -q --rpc-url $rpc_url bu add --object-api-url $objects_url --gas-limit 100000000 -b $mode --sequence $seq -a $bucket -k $key"
+  cmd="recall -q --rpc-url $rpc_url bu add --object-api-url $objects_url -b $mode -a $bucket -k $key"
   cmd="$cmd $file_name"
   res=$($cmd 2>&1)
   echo "$res"
@@ -35,8 +33,6 @@ for i in $(seq 1 "$count"); do
   if [[ "${res,,}" == *"error"* ]]; then
     break
   fi
-
-  seq=$((seq + 1))
 done
 
 rm -r "$temp_dir"
